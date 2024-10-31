@@ -4,7 +4,7 @@ import numpy as np
 
 # Load Aruco detector
 parameters = cv2.aruco.DetectorParameters_create()
-aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
+aruco_dict = cv2.aruco.DICT_5X5_50
 
 
 # Load Object Detector
@@ -24,7 +24,7 @@ cv2.polylines(img, int_corners, True, (0, 255, 0), 5)
 aruco_perimeter = cv2.arcLength(corners[0], True)
 
 # Pixel to cm ratio
-pixel_cm_ratio = aruco_perimeter / 20
+pixel_cm_ratio = aruco_perimeter / 20  
 
 contours = detector.detect_objects(img)
 
