@@ -1,13 +1,19 @@
 import cv2
 from object_detector import *
 import numpy as np
+import cv2.aruco as aruco
 
 # Load Aruco detector
-parameters = cv2.aruco.DetectorParameters_create()
-aruco_dict = cv2.aruco.DICT_5X5_50
+#parameters = cv2.aruco.DetectorParameters()
+#aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
+
+
+parameters = aruco.DetectorParameters()
+aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_50)
 
 
 # Load Object Detector
+
 detector = HomogeneousBgDetector()
 
 # Load Image
@@ -34,7 +40,7 @@ for cnt in contours:
     rect = cv2.minAreaRect(cnt)
     (x, y), (w, h), angle = rect
 
-    # Get Width and Height of the Objects by applying the Ratio pixel to cm
+    # Get Width and Height of the Objects by applying the Ratio pixel to cmdir
     object_width = w / pixel_cm_ratio
     object_height = h / pixel_cm_ratio
 
