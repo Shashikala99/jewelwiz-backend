@@ -2,10 +2,13 @@
 import cv2
 from object_detector import *
 import numpy as np
+import cv2.aruco as aruco
 
 # Load Aruco detector
-parameters = cv2.aruco.DetectorParameters_create()
-aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
+parameters = cv2.aruco.DetectorParameters()
+aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_50)
+#parameters = cv2.aruco.DetectorParameters_create()
+#aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
 
 
 # Load Object Detector
@@ -24,7 +27,9 @@ while True:
     if corners:
 
         # Draw polygon around the marker
-        int_corners = np.int0(corners)
+        int_corners = np.int32(corners)  # or np.int64 if you need a larger integer type
+
+        #int_corners = np.int0(corners)
         cv2.polylines(img, int_corners, True, (0, 255, 0), 5)
 
         # Aruco Perimeter
@@ -47,7 +52,9 @@ while True:
 
             # Display rectangle
             box = cv2.boxPoints(rect)
-            box = np.int0(box)
+            #box = np.int0(box)
+            box = np.int32(box)  # Or np.int64(box) if needed
+
 
             cv2.circle(img, (int(x), int(y)), 5, (0, 0, 255), -1)
             cv2.polylines(img, [box], True, (255, 0, 0), 2)
@@ -63,3 +70,5 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
+

@@ -2,7 +2,7 @@ import cv2
 
 
 class HomogeneousBgDetector():
-    def __init__(self):
+    def _init_(self):
         pass
 
     def detect_objects(self, frame):
